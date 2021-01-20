@@ -29,6 +29,18 @@ if (-not $LanguageShort)
   $LangaugeShort = $Language
 }
 
+if (-not $LanguageDisplayName)
+{
+  $LanguageDisplayName = $Language
+}
+
+# Given the metadata url under https://github.com/Azure/azure-sdk/tree/master/_data/releases/latest, 
+# the function will return the csv metadata back as part of response.
+function Get-CSVMetadata ([string]$MetadataUri) {
+  $metadataResponse = Invoke-RestMethod -Uri $MetadataUri -method "GET" -MaximumRetryCount 3 -RetryIntervalSec 10 | ConvertFrom-Csv
+  return $metadataResponse
+}
+
 # Transformed Functions
 $GetPackageInfoFromRepoFn = "Get-${Language}-PackageInfoFromRepo"
 $GetPackageInfoFromPackageFileFn = "Get-${Language}-PackageInfoFromPackageFile"
