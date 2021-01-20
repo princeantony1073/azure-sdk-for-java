@@ -94,7 +94,7 @@ else
 }
 
 &$EngCommonScriptsDir/Update-DevOps-Release-WorkItem.ps1 `
--language $Language `
+-language $LanguageDisplayName `
 -packageName $packageProperties.Name `
 -version $newVersion `
 -plannedDate $releaseDateString `
